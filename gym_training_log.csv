@@ -1,0 +1,26 @@
+Date,Session_Type,Exercise,Sets,Reps,Weight_kg,RPE_Per_Set,Rest_Minutes,Session_Duration_Minutes,RPE_Score,Training_Load_AU,Volume_Load,Notes
+2024-01-02,Special_Strength,Overhead_Shot_Throw,3,8,7,6,3,41,8,328,168,Overhead_Shot_Throw felt good
+2024-01-04,Strength,Clean,3,7,136,9,3,40,7,276,2856,Clean felt heavy
+2024-01-06,Strength,Overhead_Shot_Throw,3,6,10,7,2,35,8,280,180,Overhead_Shot_Throw felt good
+2024-01-08,Special_Strength,Standing_Shot_Throw,3,6,18,8,3,38,7,266,324,Standing_Shot_Throw felt good
+2024-01-10,Strength,Rotational_Medicine_Ball,3,7,18,8,2,36,8,292,378,Rotational_Medicine_Ball felt good
+2024-01-12,Special_Strength,Power_Clean,3,6,14,7,3,38,7,266,252,Power_Clean felt good
+2024-01-14,Strength,Deadlift,5,3,85,9,2,38,7,262,1275,Deadlift felt heavy
+2024-01-16,Power,Clean,3,3,86,9,4,36,7,256,774,Clean felt heavy
+2024-01-18,Special_Strength,Clean,5,5,113,8,3,48,8,380,2825,Clean felt good
+2024-01-20,Special_Strength,Bench_Press,3,3,112,9,2,30,7,214,1008,Bench_Press felt heavy
+2024-01-22,Strength,Clean,4,4,142,8,3,40,7,280,2272,Clean felt good
+2024-01-24,Strength,Standing_Shot_Throw,3,8,13,8,4,44,6,264,312,Standing_Shot_Throw felt good
+2024-01-26,Special_Strength,Overhead_Press,4,6,72,7,3,44,8,352,1728,Overhead_Press felt good
+2024-01-28,Power,Power_Clean,3,6,8,7,2,35,7,245,144,Power_Clean felt good
+2024-01-30,Power,Standing_Shot_Throw,3,5,13,7,2,34,7,234,195,Standing_Shot_Throw felt good
+2024-02-01,Strength,Rotational_Medicine_Ball,3,9,11,6,4,46,6,273,297,Rotational_Medicine_Ball felt good
+2024-02-03,Special_Strength,Front_Squat,3,9,18,6,2,40,8,316,486,Front_Squat felt good
+2024-02-05,Special_Strength,Deadlift,4,4,125,9,3,40,7,280,2000,Deadlift felt heavy
+2024-02-07,Special_Strength,Back_Squat,3,4,103,7,2,32,8,256,1236,Back_Squat felt good
+2024-02-09,Special_Strength,Overhead_Press,4,7,67,9,4,50,6,300,1876,Overhead_Press felt heavy
+2024-02-11,Strength,Power_Clean,3,5,18,8,3,36,7,256,270,Power_Clean felt good
+2024-02-13,Strength,Overhead_Shot_Throw,3,5,6,9,3,36,6,219,90,Overhead_Shot_Throw felt heavy
+2024-02-15,Power,Overhead_Shot_Throw,3,7,13,9,4,42,7,298,273,Overhead_Shot_Throw felt heavy
+2024-02-17,Special_Strength,Overhead_Shot_Throw,3,7,16,8,2,36,7,256,336,Overhead_Shot_Throw felt good
+2024-02-19,Special_Strength,Power_Clean,3,8,9,8,3,41,8,328,216,Power_Clean felt good

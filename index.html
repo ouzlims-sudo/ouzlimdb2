@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thrower Training Load Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="nav-header">
+            <div class="nav-container">
+                <h1 class="nav-title">Thrower Training Tracker</h1>
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+                    <button class="nav-tab" data-tab="track">Track Training</button>
+                    <button class="nav-tab" data-tab="gym">Gym Training</button>
+                    <button class="nav-tab" data-tab="history">History</button>
+                    <button class="nav-tab" data-tab="rpe">RPE Guide</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="tab-content active">
+                <div class="container">
+                    <h2 class="section-title">Training Dashboard</h2>
+                    
+                    <!-- Key Metrics Cards -->
+                    <div class="metrics-grid">
+                        <div class="card metric-card">
+                            <div class="card__body">
+                                <h3>Current Week Load</h3>
+                                <div class="metric-value" id="currentWeekLoad">0</div>
+                                <div class="metric-unit">Load Units</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card metric-card">
+                            <div class="card__body">
+                                <h3>Weekly Average</h3>
+                                <div class="metric-value" id="weeklyAverage">0</div>
+                                <div class="metric-unit">Load Units</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card metric-card">
+                            <div class="card__body">
+                                <h3>ACWR</h3>
+                                <div class="metric-value" id="acwrValue">0.0</div>
+                                <div class="metric-status" id="acwrStatus">-</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card metric-card">
+                            <div class="card__body">
+                                <h3>Training Monotony</h3>
+                                <div class="metric-value" id="monotonyValue">0.0</div>
+                                <div class="metric-unit">Ratio</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card metric-card">
+                            <div class="card__body">
+                                <h3>Training Strain</h3>
+                                <div class="metric-value" id="strainValue">0</div>
+                                <div class="metric-unit">Strain Units</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card metric-card">
+                            <div class="card__body">
+                                <h3>Weekly Throws</h3>
+                                <div class="metric-value" id="weeklyThrows">0</div>
+                                <div class="metric-unit">Total Throws</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-container">
+                        <div class="card chart-card">
+                            <div class="card__body">
+                                <h3>Training Load Trend</h3>
+                                <div class="chart-container" style="position: relative; height: 300px;">
+                                    <canvas id="loadTrendChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Track Training Section -->
+            <section id="track" class="tab-content">
+                <div class="container">
+                    <h2 class="section-title">Track Training Log</h2>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <form id="trackForm" class="training-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="trackDate">Date</label>
+                                        <input type="date" id="trackDate" class="form-control" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="sessionType">Session Type</label>
+                                        <select id="sessionType" class="form-control" required>
+                                            <option value="">Select Type</option>
+                                            <option value="Technical">Technical</option>
+                                            <option value="Competition Prep">Competition Prep</option>
+                                            <option value="Volume">Volume</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="event">Event</label>
+                                        <select id="event" class="form-control" required>
+                                            <option value="">Select Event</option>
+                                            <option value="Shot Put">Shot Put</option>
+                                            <option value="Discus">Discus</option>
+                                            <option value="Hammer">Hammer</option>
+                                            <option value="Javelin">Javelin</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="implementWeight">Implement Weight (kg)</label>
+                                        <input type="number" id="implementWeight" class="form-control" step="0.01" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="totalThrows">Total Throws</label>
+                                        <input type="number" id="totalThrows" class="form-control" min="1" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="sessionDuration">Duration (minutes)</label>
+                                        <input type="number" id="sessionDuration" class="form-control" min="1" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="sessionRPE">Session RPE (1-10)</label>
+                                        <input type="number" id="sessionRPE" class="form-control" min="1" max="10" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="bestThrow">Best Throw (m)</label>
+                                        <input type="number" id="bestThrow" class="form-control" step="0.01">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="trackNotes">Notes</label>
+                                    <textarea id="trackNotes" class="form-control" rows="3" placeholder="Session notes..."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn--primary btn--full-width">Log Track Session</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gym Training Section -->
+            <section id="gym" class="tab-content">
+                <div class="container">
+                    <h2 class="section-title">Gym Training Log</h2>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <form id="gymForm" class="training-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="gymDate">Date</label>
+                                        <input type="date" id="gymDate" class="form-control" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="gymSessionType">Session Type</label>
+                                        <select id="gymSessionType" class="form-control" required>
+                                            <option value="">Select Type</option>
+                                            <option value="Strength">Strength</option>
+                                            <option value="Power">Power</option>
+                                            <option value="Special Strength">Special Strength</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="exercise">Exercise</label>
+                                        <input type="text" id="exercise" class="form-control" placeholder="e.g., Back Squat" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="gymDuration">Duration (minutes)</label>
+                                        <input type="number" id="gymDuration" class="form-control" min="1" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="sets">Sets</label>
+                                        <input type="number" id="sets" class="form-control" min="1" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="reps">Reps</label>
+                                        <input type="number" id="reps" class="form-control" min="1" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="weight">Weight (kg)</label>
+                                        <input type="number" id="weight" class="form-control" step="0.5" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="gymRPE">Session RPE (1-10)</label>
+                                        <input type="number" id="gymRPE" class="form-control" min="1" max="10" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="gymNotes">Notes</label>
+                                    <textarea id="gymNotes" class="form-control" rows="3" placeholder="Session notes..."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn--primary btn--full-width">Log Gym Session</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section id="history" class="tab-content">
+                <div class="container">
+                    <h2 class="section-title">Training History</h2>
+                    
+                    <div class="history-tabs">
+                        <button class="btn btn--secondary history-tab active" data-history="recent">Recent Sessions</button>
+                        <button class="btn btn--secondary history-tab" data-history="weekly">Weekly Summary</button>
+                    </div>
+
+                    <div id="recentSessions" class="history-content active">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Recent Training Sessions</h3>
+                                <div class="table-container">
+                                    <table class="history-table" id="recentSessionsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Type</th>
+                                                <th>Activity</th>
+                                                <th>Load</th>
+                                                <th>RPE</th>
+                                                <th>Duration</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="recentSessionsBody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="weeklySummary" class="history-content">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Weekly Training Summary</h3>
+                                <div class="table-container">
+                                    <table class="history-table" id="weeklySummaryTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Week</th>
+                                                <th>Total Load</th>
+                                                <th>Avg Load</th>
+                                                <th>Sessions</th>
+                                                <th>Monotony</th>
+                                                <th>Strain</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="weeklySummaryBody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RPE Guide Section -->
+            <section id="rpe" class="tab-content">
+                <div class="container">
+                    <h2 class="section-title">RPE Reference Guide</h2>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Rate of Perceived Exertion (RPE) Scale</h3>
+                            <p class="rpe-description">Use this scale to rate the intensity of your training sessions from 1 (very easy) to 10 (maximum effort).</p>
+                            
+                            <div class="rpe-scale">
+                                <div class="rpe-item rpe-1-2">
+                                    <div class="rpe-number">1-2</div>
+                                    <div class="rpe-text">
+                                        <strong>Very Easy</strong><br>
+                                        Barely any effort, could continue for hours
+                                    </div>
+                                </div>
+                                
+                                <div class="rpe-item rpe-3-4">
+                                    <div class="rpe-number">3-4</div>
+                                    <div class="rpe-text">
+                                        <strong>Easy</strong><br>
+                                        Light effort, comfortable pace
+                                    </div>
+                                </div>
+                                
+                                <div class="rpe-item rpe-5-6">
+                                    <div class="rpe-number">5-6</div>
+                                    <div class="rpe-text">
+                                        <strong>Moderate</strong><br>
+                                        Noticeable effort, moderate challenge
+                                    </div>
+                                </div>
+                                
+                                <div class="rpe-item rpe-7-8">
+                                    <div class="rpe-number">7-8</div>
+                                    <div class="rpe-text">
+                                        <strong>Hard</strong><br>
+                                        Challenging effort, getting difficult
+                                    </div>
+                                </div>
+                                
+                                <div class="rpe-item rpe-9-10">
+                                    <div class="rpe-number">9-10</div>
+                                    <div class="rpe-text">
+                                        <strong>Very Hard / Maximum</strong><br>
+                                        Near maximum to absolute maximum effort
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="optimal-ranges">
+                                <h4>Optimal Training Ranges</h4>
+                                <div class="range-grid">
+                                    <div class="range-item">
+                                        <strong>ACWR (Acute:Chronic Workload Ratio)</strong>
+                                        <div class="range-indicators">
+                                            <span class="range-good">0.8 - 1.3 Optimal</span>
+                                            <span class="range-caution">0.7 - 0.8, 1.3 - 1.5 Caution</span>
+                                            <span class="range-danger">&lt;0.7, &gt;1.5 High Risk</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
